@@ -7,7 +7,7 @@ class BookingPipeline:
             self.create_table()
 
     def create_connection(self):
-        self.conn = sqlite3.connect("hotels.db")
+        self.conn = sqlite3.connect("booking_hotels.db")
         self.curr = self.conn.cursor()
 
     def create_table(self):
