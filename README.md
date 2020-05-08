@@ -11,5 +11,6 @@ Scrapy project to crawl hotel info from booking.com
 8. Go to the project directory, where you cloned the repo
 9. Type: scrapy crawl booking
 10. Enter
+11. As a result, all data will be collected in booking_hotels.db in 3 tables (my crawl for hotels in Azerbaijan is given as an example in the repo)
 
 Note: After this, crawler will run and you will see items data shown simultaneously in your terminal
