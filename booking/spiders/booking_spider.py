@@ -4,7 +4,6 @@ from scrapy.loader import ItemLoader
 from booking.items import HotelItem, HotelInfoItem, HotelRoomItem, HotelReviewItem
 import sys, os
 
-
 class BookingSpider(scrapy.Spider):
     name = "booking"
     #'Months' that reviews are written
@@ -18,6 +17,7 @@ class BookingSpider(scrapy.Spider):
     #desired search page count to scrape
     desired_count_to_scrape = 60
 
+    #Url to scrape
     url = "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1FCAEoggI46AdIM1gEaBGIAQGYAQm4ARfIAQzYAQHoAQH4AQuIAgGoAgO4AuaN7PMFwAIB&sid=1ec3a7e834ccaaaf9cd6ac22cb6dedd4&tmpl=searchresults&ac_click_type=b&ac_position=0&class_interval=1&dest_id=15&dest_type=country&dtdisc=0&from_sf=1&group_adults=1&group_children=0&inac=0&index_postcard=0&label_click=undef&no_rooms=1&postcard=0&raw_dest_type=country&room1=A&sb_price_type=total&search_selected=1&shw_aparth=1&slp_r_match=0&src=index&src_elem=sb&srpvid=389233fc26a90038&ss=Azerbaijan&ss_all=0&ss_raw=Azerbaijan&ssb=empty&sshis=0&top_ufis=1&rows=25&offset="
 
     def start_requests(self):
@@ -54,7 +54,7 @@ class BookingSpider(scrapy.Spider):
                 yield scrapy.Request(items['link'], callback = self.parse_hotel_info)
 
         self.page_offset+=25
-
+        #Handle Pagination
         if self.count < self.desired_count_to_scrape:
             next_page = self.url + str(self.page_offset)
             yield scrapy.Request(next_page, self.parse)
