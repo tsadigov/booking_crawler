@@ -145,7 +145,7 @@ class BookingSpider(scrapy.Spider):
 
             month = date.split(" ")[1]
             year = date.split(" ")[2]
-            if (month in self.months) and (int(year) >= 2019):
+            if (month in self.months) and (int(year) > 2019):
                 item['name'] = name
                 item['country'] = country
                 item['rate'] = rate
