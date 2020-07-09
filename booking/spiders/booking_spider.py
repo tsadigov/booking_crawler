@@ -7,7 +7,7 @@ import sys, os
 class BookingSpider(scrapy.Spider):
     name = "booking"
     #'Months' that reviews are written
-    months = ['January','February','March','December']
+    months = ['April','May','June','July']
     #Using hotel ids to not scrape the same hotel page
     hotel_id_list = []
     #search page offset
@@ -18,7 +18,7 @@ class BookingSpider(scrapy.Spider):
     desired_count_to_scrape = 60
 
     #Url to scrape
-    url = "https://www.booking.com/searchresults.en-gb.html?label=gen173nr-1FCAEoggI46AdIM1gEaBGIAQGYAQm4ARfIAQzYAQHoAQH4AQuIAgGoAgO4AuaN7PMFwAIB&sid=1ec3a7e834ccaaaf9cd6ac22cb6dedd4&tmpl=searchresults&ac_click_type=b&ac_position=0&class_interval=1&dest_id=15&dest_type=country&dtdisc=0&from_sf=1&group_adults=1&group_children=0&inac=0&index_postcard=0&label_click=undef&no_rooms=1&postcard=0&raw_dest_type=country&room1=A&sb_price_type=total&search_selected=1&shw_aparth=1&slp_r_match=0&src=index&src_elem=sb&srpvid=389233fc26a90038&ss=Azerbaijan&ss_all=0&ss_raw=Azerbaijan&ssb=empty&sshis=0&top_ufis=1&rows=25&offset="
+    url = "https://www.booking.com/searchresults.html?label=gen173nr-1FCAEoggI46AdIM1gEaBGIAQGYATG4ARfIAQzYAQHoAQH4AQKIAgGoAgO4ApGmmPgFwAIB0gIkZGI3M2E3OTctYzk2Ny00ZjYzLTg0NjEtYjMyNWVlNjE5YzAz2AIF4AIB&sid=bbce96b62206a52d671bdfab8854e95d&tmpl=searchresults&class_interval=1&dest_id=15&dest_type=country&dtdisc=0&from_sf=1&group_adults=2&group_children=0&inac=0&index_postcard=0&label_click=undef&no_rooms=1&postcard=0&room1=A%2CA&sb_price_type=total&search_pageview_id=bc6783483f64022a&shw_aparth=1&slp_r_match=0&src=index&src_elem=sb&srpvid=ce07834f85f800bc&ss=Azerbaijan&ss_all=0&ssb=empty&sshis=0&top_ufis=1&rows=25&offset="
 
     def start_requests(self):
         yield scrapy.Request(self.url+"0", self.parse)
@@ -138,7 +138,7 @@ class BookingSpider(scrapy.Spider):
             name = b.css("span.bui-avatar-block__title::text").get().strip()
             country = b.css("span.bui-avatar-block__subtitle::text").get()
             rate = b.css("div.bui-review-score__badge::text").get()
-            date = b.css('div.c-review-block__row').css("span.c-review-block__date::text").get().split(":")[1].strip()
+            date = b.css("span.c-review-block__date::text").get().split(":")[1].strip()
 
             r_title = self.check_empty(b.css("h3.c-review-block__title::text").get())
             reviews = b.css("div.c-review__row")
